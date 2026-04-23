@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You're In — Watch Your Free Videos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red: #e63946;
+      --dark-red: #c1121f;
+      --navy: #0d1117;
+      --navy-light: #21262d;
+      --white: #ffffff;
+      --grey: #8b949e;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(230,57,70,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* LOGO BAR */
+    .logo-bar {
+      width: 100%;
+      background: #ffffff;
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      border-bottom: 4px solid var(--red);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    .logo-bar-divider {
+      width: 1px;
+      height: 40px;
+      background: #dee2e6;
+      flex-shrink: 0;
+    }
+
+    .logo-bar img {
+      height: 44px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* MAIN */
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 24px 80px;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* CHECK */
+    .check {
+      width: 72px;
+      height: 72px;
+      background: var(--red);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      font-size: 32px;
+      animation: popIn 0.4s ease 0.2s both;
+    }
+
+    .eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 12px;
+      text-align: center;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(36px, 6vw, 58px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.0;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+      text-align: center;
+      animation: fadeUp 0.5s ease 0.1s both;
+    }
+
+    .intro {
+      font-size: 16px;
+      color: #adb5bd;
+      line-height: 1.7;
+      margin-bottom: 40px;
+      text-align: center;
+      max-width: 540px;
+      animation: fadeUp 0.5s ease 0.2s both;
+    }
+
+    .intro strong { color: var(--white); font-weight: 600; }
+
+    /* BIG CTA */
+    .cta-block {
+      width: 100%;
+      background: linear-gradient(135deg, #1a1f2e, #21262d);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 40px 36px;
+      text-align: center;
+      margin-bottom: 32px;
+      animation: fadeUp 0.5s ease 0.3s both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-block::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--red);
+    }
+
+    .cta-block-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 16px;
+    }
+
+    .cta-block h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .cta-block p {
+      font-size: 14px;
+      color: #adb5bd;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .cta-block p strong { color: var(--white); }
+
+    /* VIDEO LIST */
+    .video-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .video-item {
+      background: rgba(255,255,255,0.04);
+      border-radius: 8px;
+      padding: 12px 10px;
+      text-align: center;
+    }
+
+    .video-item-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .video-item-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--white);
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .watch-btn {
+      display: inline-block;
+      padding: 18px 48px;
+      background: var(--red);
+      color: white;
+      border-radius: 8px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .watch-btn:hover { background: var(--dark-red); }
+    .watch-btn:active { transform: scale(0.99); }
+
+    /* NEXT STEPS */
+    .next-steps-card {
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 32px;
+      animation: fadeUp 0.5s ease 0.4s both;
+    }
+
+    .next-steps-card h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 20px;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .step:last-child { margin-bottom: 0; }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      background: var(--red);
+      border-radius: 50%;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-text {
+      font-size: 14px;
+      color: #cdd9e5;
+      line-height: 1.6;
+    }
+
+    .step-text strong { color: var(--white); font-weight: 600; }
+
+    /* EVENT LINKS */
+    .event-links {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      animation: fadeUp 0.5s ease 0.5s both;
+    }
+
+    .event-link {
+      display: block;
+      padding: 14px 24px;
+      background: transparent;
+      color: var(--red);
+      border: 1.5px solid var(--red);
+      border-radius: 8px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .event-link:hover {
+      background: rgba(230,57,70,0.1);
+    }
+
+    /* FOOTER */
+    .footer {
+      width: 100%;
+      padding: 20px 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer p {
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.6); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 480px) {
+      .logo-bar { padding: 16px 20px; gap: 24px; }
+      .logo-bar img { height: 32px; }
+      .logo-bar-divider { height: 28px; }
+      .cta-block { padding: 28px 20px; }
+      .video-list { grid-template-columns: repeat(2, 1fr); }
+      .next-steps-card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGO BAR -->
+  <div class="logo-bar">
+    <img src="disc-centers-of-america.svg" alt="DISC Centers of America" />
+    <div class="logo-bar-divider"></div>
+    <img src="Knee-Centers-of-America.png" alt="Knee Centers of America" />
+    <div class="logo-bar-divider"></div>
+    <img src="ConciergeCoachesLogo_1_.png" alt="Concierge Coaches" style="height:58px;" />
+  </div>
+
+  <div class="content">
+
+    <div class="check">&#10003;</div>
+    <div class="eyebrow">You're All Set</div>
+    <h1>Your Videos Are Ready.</h1>
+    <p class="intro">
+      <strong>All 4 videos are waiting for you below.</strong> Watch them in order for the full system — then keep an eye on your inbox. Dr. Kaplan or Dr. Bard will be in touch personally.
+    </p>
+
+    <!-- BIG WATCH CTA -->
+    <div class="cta-block">
+      <div class="cta-block-label">Your Free Video Training</div>
+      <h2>The 3 B's of Spinal<br>Decompression Success</h2>
+      <p>Presented by <strong>Dr. Eric Kaplan &amp; Dr. Perry Bard</strong><br>DISC Centers of America &nbsp;&middot;&nbsp; Non-Surgical Spinal Decompression Centers</p>
+
+      <div class="video-list">
+        <div class="video-item">
+          <div class="video-item-num">01</div>
+          <div class="video-item-title">The Best Doctor</div>
+        </div>
+        <div class="video-item">
+          <div class="video-item-num">02</div>
+          <div class="video-item-title">The Best Marketing</div>
+        </div>
+        <div class="video-item">
+          <div class="video-item-num">03</div>
+          <div class="video-item-title">The Best Brand</div>
+        </div>
+        <div class="video-item">
+          <div class="video-item-num">04</div>
+          <div class="video-item-title">The Bonus B</div>
+        </div>
+      </div>
+
+      <a href="https://conciergecoaches.clickfunnels.com/optin-638830551773696194693" target="_blank" class="watch-btn">
+        Watch All 4 Videos Now &rarr;
+      </a>
+    </div>
+
+    <!-- NEXT STEPS -->
+    <div class="next-steps-card">
+      <h3>What Happens Next</h3>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Watch your videos above</strong> — all 4 are available right now on the next page.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Check your inbox</strong> — we're also sending you the video link so you can come back and watch anytime.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Expect a personal call</strong> — Dr. Kaplan or Dr. Bard will reach out to schedule your complimentary practice analysis.</div>
+      </div>
+    </div>
+
+    <!-- EVENT LINKS -->
+    <div class="event-links">
+      <a href="https://thechiroevent.com" class="event-link">Learn About The Chiro Event &rarr;</a>
+      <a href="https://chicagochiroevent.com/" class="event-link">Learn About The Chicago Chiro Event &rarr;</a>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>DISC Centers of America &nbsp;&middot;&nbsp; Knee Centers of America &nbsp;&middot;&nbsp; Concierge Coaches</p>
+  </div>
+
+</body>
+</html>
