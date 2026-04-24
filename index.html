@@ -643,7 +643,8 @@
       .video-strip { padding: 24px 16px; }
       .video-cards { grid-template-columns: repeat(2, 1fr); }
       .main { grid-template-columns: 1fr; padding: 40px 20px 60px; }
-      .left { padding-right: 0; margin-bottom: 40px; }
+      .left { padding-right: 0; margin-bottom: 40px; order: 2; }
+      .right { order: 1; margin-bottom: 40px; }
       .form-card { padding: 28px 20px; position: static; }
       .form-row { grid-template-columns: 1fr; }
       .proof-bar { gap: 0; }
@@ -652,7 +653,12 @@
     }
 
     @media (max-width: 480px) {
-      .video-cards { grid-template-columns: 1fr; }
+      .video-cards { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .video-card-desc { display: none; }
+      .video-card { padding: 14px 12px; }
+      .video-card-num { font-size: 22px; margin-bottom: 4px; }
+      .video-card-title { font-size: 13px; }
+      .video-lock { font-size: 10px; }
     }
   </style>
 </head>
@@ -686,26 +692,26 @@
       <div class="video-cards">
         <div class="video-card">
           <div class="video-card-num">01</div>
-          <div class="video-card-title">The Best Doctor</div>
-          <div class="video-card-desc">What separates the top 1% — and why it starts with you.</div>
+          <div class="video-card-title">The Best Brand</div>
+          <div class="video-card-desc">Why your brand — not your technique — is what makes patients choose you, refer you, and travel to you. Dr. Kaplan breaks down what McDonald's, Nutrisystem, and the top chiro practices all have in common.</div>
           <div class="video-lock">&#128274; Unlock Free</div>
         </div>
         <div class="video-card">
           <div class="video-card-num">02</div>
           <div class="video-card-title">The Best Marketing</div>
-          <div class="video-card-desc">ROI, cost per acquisition, and how to attract the highest-value patients.</div>
+          <div class="video-card-desc">Dr. Bard on ROI, cost per acquisition, and patient value average. How to identify the right marketing channels for your market and attract higher-value decompression, neuropathy, and knee patients.</div>
           <div class="video-lock">&#128274; Unlock Free</div>
         </div>
         <div class="video-card">
           <div class="video-card-num">03</div>
-          <div class="video-card-title">The Best Brand</div>
-          <div class="video-card-desc">The BRAND framework — and why decompression is the centerpiece.</div>
+          <div class="video-card-title">The Best Doctor</div>
+          <div class="video-card-desc">Why neuropathy and decompression are the two most underutilized revenue opportunities in chiropractic right now — and what it takes to become the go-to specialist in your market.</div>
           <div class="video-lock">&#128274; Unlock Free</div>
         </div>
         <div class="video-card">
           <div class="video-card-num">04</div>
           <div class="video-card-title">The Bonus B</div>
-          <div class="video-card-desc">The environment, tools, and training that puts it all together.</div>
+          <div class="video-card-desc">Dr. Bard on the tools, systems, and protocols you can implement Monday morning — and the one environment where it all comes together.</div>
           <div class="video-lock">&#128274; Unlock Free</div>
         </div>
       </div>
@@ -745,19 +751,19 @@
       <ul class="benefits">
         <li>
           <span class="benefit-icon">&#10003;</span>
-          The exact system behind 250+ DISC Centers clinics across 45 states
+          Why your brand — not your technique — determines how many patients choose you, refer you, and stay with you
         </li>
         <li>
           <span class="benefit-icon">&#10003;</span>
-          How to build a decompression brand that attracts patients — and keeps them
+          How to calculate ROI and cost per acquisition to find the right marketing channels for your specific market
         </li>
         <li>
           <span class="benefit-icon">&#10003;</span>
-          Marketing strategies that drive the highest-value patients through your door
+          Why neuropathy and decompression are the two most underutilized revenue opportunities in chiropractic right now
         </li>
         <li>
           <span class="benefit-icon">&#10003;</span>
-          The same protocols now taught at Life University's first ever university-backed Spinal Decompression Program
+          The tools, systems, and protocols you can implement Monday morning to start seeing results immediately
         </li>
       </ul>
 
@@ -843,14 +849,6 @@
         <div class="form-card-label">Free Instant Access</div>
         <h3>Get the Free<br>Video Training</h3>
         <p>Fill out the short form below. We'll send you instant access to all 4 videos — plus a complimentary practice analysis from Dr. Kaplan or Dr. Bard.</p>
-
-        <div class="form-video-list">
-          <p>You're unlocking:</p>
-          <div class="form-video-item"><span>01</span> The Best Doctor</div>
-          <div class="form-video-item"><span>02</span> The Best Marketing</div>
-          <div class="form-video-item"><span>03</span> The Best Brand</div>
-          <div class="form-video-item"><span>04</span> The Bonus B</div>
-        </div>
 
         <form id="videoForm" action="https://formspree.io/f/xeevazzy" method="POST">
 
